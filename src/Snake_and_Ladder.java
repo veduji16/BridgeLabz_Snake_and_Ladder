@@ -14,6 +14,7 @@ public class Snake_and_Ladder {
         int start;
         int position = 0;
         int goal = 100;
+        int diceCount = 0;
         start = position;
 
         System.out.println("\n...Welcome to the Snake & Ladders Game...\n");
@@ -21,6 +22,7 @@ public class Snake_and_Ladder {
 
         while (position < goal) {
             int diceValue = randomNum();
+            diceCount++;
 
             System.out.println("Dice rolled to: " + diceValue);
 
@@ -47,7 +49,9 @@ public class Snake_and_Ladder {
             } else if (position > goal) {
                 position -= diceValue;
             }
+            System.out.println("Current Position: " + position + "\n");
         }
         System.out.println("Congrats! You Won.");
+        System.out.println("Total Dice rolls: " + diceCount);
     }
 }
