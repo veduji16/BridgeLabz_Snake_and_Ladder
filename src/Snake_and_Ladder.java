@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class UC_4 {
+public class Snake_and_Ladder {
     private static int randomNum() {
         Random dice = new Random();
         return dice.nextInt(6) + 1;
@@ -45,7 +45,7 @@ public class UC_4 {
                 System.out.println("...Game is restarted...");
                 position = 0;
             } else if (position > goal) {
-                break;
+                position -= diceValue;
             }
         }
         System.out.println("Congrats! You Won.");
