@@ -11,20 +11,19 @@ public class Snake_and_Ladder {
     }
 
     public static void main(String[] args) {
-        int start;
-        int position = 0;
+
+        int positionPlayer1 = 0;
+        int positionPlayer2 = 0;
         int goal = 100;
         int diceCount = 0;
-        start = position;
+        int currentPlayer = 1;
 
-        System.out.println("\n...Welcome to the Snake & Ladders Game...\n");
-        System.out.println("Your Start Postion: " + start);
-
-        while (position < goal) {
+        while (positionPlayer1 < goal && positionPlayer2 < goal) {
             int diceValue = randomNum();
             diceCount++;
 
             System.out.println("Dice rolled to: " + diceValue);
+            System.out.println("Current Player: Player " + currentPlayer);
 
             int option = checkOption();
             switch (option) {
@@ -34,24 +33,49 @@ public class Snake_and_Ladder {
 
                 case 2:
                     System.out.println("Ladder");
-                    position += diceValue;
-                    break;
+                    if (currentPlayer == 1) {
+                        positionPlayer1 += diceValue;
+                    } else {
+                        positionPlayer2 += diceValue;
+                    }
+                    continue;
 
                 case 3:
                     System.out.println("Snake");
-                    position -= diceValue;
+                    if (currentPlayer == 1) {
+                        positionPlayer1 -= diceValue;
+                    } else {
+                        positionPlayer2 -= diceValue;
+                    }
                     break;
             }
 
-            if (position < 0) {
-                System.out.println("...Game is restarted...");
-                position = 0;
-            } else if (position > goal) {
-                position -= diceValue;
+            if (positionPlayer1 < 0) {
+                System.out.println("Player 1: ...Game is restarted...");
+                positionPlayer1 = 0;
+            } else if (positionPlayer1 > goal) {
+                positionPlayer1 -= diceValue;
             }
-            System.out.println("Current Position: " + position + "\n");
+
+            if (positionPlayer2 < 0) {
+                System.out.println("Player 2: ...Game is restarted...");
+                positionPlayer2 = 0;
+            } else if (positionPlayer2 > goal) {
+                positionPlayer2 -= diceValue;
+            }
+
+            System.out.println("Player 1 Position: " + positionPlayer1);
+            System.out.println("Player 2 Position: " + positionPlayer2);
+            System.out.println();
+
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
         }
-        System.out.println("Congrats! You Won.");
+
+        if (positionPlayer1 >= goal) {
+            System.out.println("Player 1 Wins!");
+        } else {
+            System.out.println("Player 2 Wins!");
+        }
         System.out.println("Total Dice rolls: " + diceCount);
     }
 }
