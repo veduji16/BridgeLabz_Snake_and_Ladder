@@ -45,7 +45,7 @@ public class Snake_and_Ladder {
                 System.out.println("...Game is restarted...");
                 position = 0;
             } else if (position > goal) {
-                break;
+                position -= diceValue;
             }
         }
         System.out.println("Congrats! You Won.");
