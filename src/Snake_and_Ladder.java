@@ -1,12 +1,11 @@
 import java.util.*;
 
-public class Snake_and_Ladder {
-    public static int randomNum() {
+public class UC_4 {
+    private static int randomNum() {
         Random dice = new Random();
         return dice.nextInt(6) + 1;
     }
-
-    public static int checkOption() {
+    private static int checkOption() {
         Random option = new Random();
         return option.nextInt(3) + 1;
     }
@@ -14,28 +13,41 @@ public class Snake_and_Ladder {
     public static void main(String[] args) {
         int start;
         int position = 0;
+        int goal = 100;
         start = position;
 
         System.out.println("\n...Welcome to the Snake & Ladders Game...\n");
         System.out.println("Your Start Postion: " + start);
 
-        System.out.println("Dice rolled to:  " + randomNum());
+        while (position < goal) {
+            int diceValue = randomNum();
 
-        int option = checkOption();
-        switch (option) {
-            case 1:
-                System.out.println("No Play");
-                break;
+            System.out.println("Dice rolled to: " + diceValue);
 
-            case 2:
-                System.out.println("Ladder");
-                position = position + randomNum();
-                break;
+            int option = checkOption();
+            switch (option) {
+                case 1:
+                    System.out.println("No Play");
+                    break;
 
-            case 3:
-                System.out.println("Snake");
-                position = position - randomNum();
+                case 2:
+                    System.out.println("Ladder");
+                    position += diceValue;
+                    break;
+
+                case 3:
+                    System.out.println("Snake");
+                    position -= diceValue;
+                    break;
+            }
+
+            if (position < 0) {
+                System.out.println("...Game is restarted...");
+                position = 0;
+            } else if (position > goal) {
                 break;
+            }
         }
+        System.out.println("Congrats! You Won.");
     }
 }
